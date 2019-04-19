@@ -285,6 +285,18 @@ Dangerous filters:
               Value:       * -ExecutionPolicy remotesigned *
 ```              
 
+Rule: rules/windows/process_creation/win_system_exe_anomaly.yml (https://github.com/Neo23x0/sigma/pull/323)
+```
+---
+- sigma/rules/windows/process_creation/win_system_exe_anomaly.yml
+- selection and not filter
+- filter
+- - filter:
+    - Image:
+          - '*/System32//*'
+          - '*/SysWow64//*'
+```
+
 ## Example
 
 As an example the process_creation rules were scanned and the output is shown
