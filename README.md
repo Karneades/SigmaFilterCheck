@@ -35,9 +35,17 @@ are command line or image path whitelists in Sysmon events or whitelists for
 user agents. Below I put together some ideas which could limit the risk of
 bypasses.
 
-**The question is whether we should reduce false positives through such
-loosely defined whitelists or whether we should try to reduce the possibility
-for bypasses.**
+**Result**: Only a small amount of rules have wildcards on the left side
+of the filter. Furthermore, only a subset are easy-to-bypass and are potentially
+controlled by an attacker. There are currently 285 rules (as of April 2019) in 
+the repo and only 25 of them include wildcards on the left side of the whitelist.
+For the 207 Windows rules there are 21 with such a whitelist and of the sub
+category for process_creation 16 rules were found having wildcards on the
+left side of the whitelist value.
+
+**The question is whether we should reduce false positives or whether
+we should try to reduce the possibility for bypasses. It's up to the reader
+to decide which is more likely.**
 
 _Whitelists are not a problem of Sigma itself but an issue for open source
 security detections. As the Cuckoo sandbox developers once said, only provide
@@ -66,11 +74,6 @@ The script first checks if a rule has a "not"-filter, then reads all values
 for each field and checks for wildcards. Only rules with such filters are
 shown afterwards. For wildcard filters, e.g. "not exclusion*", the
 corresponding filters, e.g. exclusion1, exclusion2, ... are used. 
-
-There are currently 285 rules in the repo and 25 of them include wildcards in
-the whitelist. For the 207 Windows rules there are 21 of such rules and of the
-sub category for process_creation 16 were found having wildcards on the left
-side of the whitelist value.
 
 ### Examples
 
@@ -103,7 +106,6 @@ detection:
 ```
 mshta vbscript:CreateObject("wscript.Shell").Run("wscript.exe test.js /HP/HP")
 ```
-
 
 | Field | Value |
 | ------------- | ------------- |
