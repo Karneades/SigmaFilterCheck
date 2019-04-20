@@ -12,10 +12,10 @@ SigmaFilterCheck is a python script to search for easy-to-bypass whitelists in
     * [Ideas](#ideas)
 * [Requirements](#requirements)
 * [Usage](#usage)
-* [Current usage of filters in Sigma rules](#current-usage-of-filters-in-sigma-rules)
+* [Current Usage of Filters](#current-usage-of-filters)
 * [Pull Requests](#pull-requests)
 * [Example](#example)
-* [Other issues](#other-issues)
+* [Other Issues](#other-issues)
 * [Credits](#credits)
 
 <!-- vim-markdown-toc -->
@@ -78,7 +78,7 @@ corresponding filters, e.g. exclusion1, exclusion2, ... are used.
 ### Examples
 
 For the otherwise valuable generic mshta spawns a shell rule the whitelist
-(`*/HP/HP*`) is used. By just adding a small text to the command line an
+`*/HP/HP*` is used. By just adding a small text to the command line an
 attacker could bypass the rule.
 
 ```
@@ -176,7 +176,7 @@ python3 sigmacheck.py dir|file
 
 See [Example](#example) below.
 
-## Current usage of filters in Sigma rules
+## Current Usage of Filters
 
 Here is a list of unique conditions with "not" from all Sigma rules (~280).
 One of the tests for finding finding filter names based on regex is found on
@@ -508,7 +508,7 @@ Number of rules with wildecards in whitelist: 16
 Number of rules checked:                      90
 ```
 
-## Other issues
+## Other Issues
 
 During testing, the filter for win_susp_taskmgr_parent was found with the
 following filter. Will this filter ever trigger for "Image" without wildcard?
