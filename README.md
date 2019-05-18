@@ -171,7 +171,11 @@ pip3 install -r requirements.txt
 ## Usage
 
 ```
-python3 sigmacheck.py dir|file
+$ python3 sigmacheck.py -h
+$ python3 sigmacheck.py ../sigma/rules/
+$ python3 sigmacheck.py ../sigma/rules/ --field commandline
+$ python3 sigmacheck.py ../sigma/rules/ --field useragent --nostats
+$ python3 sigmacheck.py ../sigma/rules/windows/process_creation/win_susp_powershell_enc_cmd.yml
 ```
 
 See [Example](#example) below.
