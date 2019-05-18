@@ -73,6 +73,7 @@ def checkRule(rule, filter):
 
 def checkFilter(filter):
     filterValues = []
+    ret = []
 
     if (isinstance(filter, list)):
         for k in filter:
@@ -81,9 +82,10 @@ def checkFilter(filter):
                 filterValues.append(ret)
     elif (isinstance(filter, dict)):
         for k in filter:
-            ret = checkFilterValue(k,filter[k])
-            if ret:
-                filterValues.append(ret)
+            if args.field == "all" or k.lower() == (args.field).lower():
+                ret = checkFilterValue(k,filter[k])
+                if ret:
+                    filterValues.append(ret)
 
     return filterValues
 
@@ -124,6 +126,7 @@ def extractFilter(line):
 
 parser = argparse.ArgumentParser(description='Check Sigma rules for easy-to-bypass whitelist values.')
 parser.add_argument('path',help='path to one Sigma rule or directory')
+parser.add_argument('--field',default="all",help='check only whitelist values for the given field name (case insensitive matching, default: all)')
 args = parser.parse_args()
 
 wildcardWhitelist = 0
