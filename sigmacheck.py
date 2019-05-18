@@ -127,6 +127,7 @@ def extractFilter(line):
 parser = argparse.ArgumentParser(description='Check Sigma rules for easy-to-bypass whitelist values.')
 parser.add_argument('path',help='path to one Sigma rule or directory')
 parser.add_argument('--field',default="all",help='check only whitelist values for the given field name (case insensitive matching, default: all)')
+parser.add_argument('--nostats',action='store_true',help='hide stats (default: false)')
 args = parser.parse_args()
 
 wildcardWhitelist = 0
@@ -179,6 +180,7 @@ for file in files:
             wildcardWhitelist += 1
             print(sigmaRule)
 
-print ("")
-print ("Number of rules with wildecards in whitelist: " + str(wildcardWhitelist))
-print ("Number of rules checked:                      " + str(len(files)))
+if (not args.nostats):
+    print ("")
+    print ("Number of rules with wildecards in whitelist: " + str(wildcardWhitelist))
+    print ("Number of rules checked:                      " + str(len(files)))
