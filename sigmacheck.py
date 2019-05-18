@@ -2,6 +2,7 @@
 # Karneades (2019)
 # https://github.com/Karneades/SigmaFilterCheck
 
+import argparse
 import yaml
 import os
 import sys
@@ -51,18 +52,6 @@ class Rule:
 
     def __str__(self):
         return yaml.dump(self.get_rule(), explicit_start=True, default_flow_style=False)
-
-def printUsage():
-    print ("")
-    print ("Check Sigma rules and return selection and filter for all sigma rules inside given directory.")
-    print ("")
-    print ("Usage:")
-    print ("   python3 sigmacheck.py [dir|file]")
-    print ("")
-    print ("   arguments:")
-    print ("       path    path to sigma rules")
-    print ("")
-    sys.exit(-1)
 
 def checkRule(rule, filter):
     filterValues = []
@@ -133,25 +122,25 @@ def extractFilter(line):
 
 ## main ##
 
-path = ""
+parser = argparse.ArgumentParser(description='Check Sigma rules for easy-to-bypass whitelist values.')
+parser.add_argument('path',help='path to one Sigma rule or directory')
+args = parser.parse_args()
+
 wildcardWhitelist = 0
 
-if len(sys.argv) > 1:
-    path = sys.argv[1]
-
-if not path:
-    printUsage()
-
 files = []
-if (os.path.isfile(path)):
-    files = [path]
+if (os.path.isfile(args.path)):
+    files = [args.path]
 else:
-    files = glob.glob(path + '/**/*.yml', recursive=True)
+    files = glob.glob(args.path + '/**/*.yml', recursive=True)
 
 for file in files:
 
     with open(file) as stream:
-        rules = list(yaml.safe_load_all(stream))
+        try:
+            rules = list(yaml.safe_load_all(stream))
+        except:
+            print ("Error parsing: " + file)
 
     for rule in rules:
 
