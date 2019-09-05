@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Karneades (2019)
+# Andreas Hunkeler, @Karneades (2019)
 # https://github.com/Karneades/SigmaFilterCheck
 
 import argparse
